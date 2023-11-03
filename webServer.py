@@ -1,7 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from ssl import wrap_socket
 
-host = "172.31.53.237"
-port = 8080
+host = "127.0.0.1"
+port = 8084
 
 def sendFile(fileName, server):
     with open(fileName, "r") as file:
@@ -12,6 +13,7 @@ def sendFile(fileName, server):
 class MyServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        print(self.path)
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
@@ -20,6 +22,11 @@ class MyServer(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     webServer = HTTPServer((host, port), MyServer)
+
+    webServer.socket = wrap_socket(webServer.socket,
+                                   keyfile = "/home/ubuntu/private.key",
+                                   certfile = "/home/ubuntu/cert.pem",
+                                   server_side = True)
 
     try:
         print("Web server starting")
