@@ -1,9 +1,39 @@
 <!DOCTYPE html>
 <html>
 
+
+
+<head>
+    <script>
+        var clicks = 0;
+    </script>
+    
+    <script>
+
+    function myClick() {
+        clicks += 1;
+        document.getElementById("clicks").innerHTML = clicks;
+    };
+
+    function eraseClicks() {
+        clicks = 0;
+        document.getElementById("clicks").innerHTML = clicks;
+    }
+
+    </script>
+</head>
+
 <body>
 
 <h1>Test 2</h1>
+
+<script type="text/javascript">
+    
+    </script>
+    <button type="button" onClick="myClick()">Click me</button>
+    <button type="button" onClick="eraseClicks()">Click me to erase</button>
+
+    <p>Clicks: <a id="clicks">0</a></p>
 
 </body>
 
